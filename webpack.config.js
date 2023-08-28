@@ -4,7 +4,7 @@ const webpack = require('webpack');
 
 
 
-modules.exports ={
+module.exports ={
     entry: './src/index.js',
     mode:'development',
     module:{
@@ -25,15 +25,16 @@ modules.exports ={
     resolve:{ extensions:['*','.js','.jsx']},
     output:{
         path:path.resolve(__dirname,'dist/'),
-        public: '/dist/',
+        publicPath: '/dist/',
         filename: 'bundle.js'
     },
-    devServer:{
-
-        contentBase:path.join(__dirname,'public/'),
-        port:3000,
-        publicPath:'http://localhost:3000/dist/',
-        hotOnly:true
-    },
+    devServer: {
+        port: 3000,
+        hot: "only",
+        static: {
+           directory: path.join(__dirname, './'),
+           serveIndex: true,
+         },
+      },
     plugins:[new webpack.HotModuleReplacementPlugin()]
 }
